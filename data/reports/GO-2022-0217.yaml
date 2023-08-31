@@ -1,0 +1,32 @@
+id: GO-2022-0217
+modules:
+    - module: std
+      versions:
+        - fixed: 1.10.8
+        - introduced: 1.11.0-0
+          fixed: 1.11.5
+      vulnerable_at: 1.11.4
+      packages:
+        - package: crypto/elliptic
+          symbols:
+            - curve.doubleJacobian
+          skip_fix: 'TODO: revisit this reason (fix appears to not work with Go <1.18)'
+summary: Denial of service affecting P-521 and P-384 curves in crypto/elliptic
+description: |-
+    A DoS vulnerability in the crypto/elliptic implementations of the P-521 and
+    P-384 elliptic curves may let an attacker craft inputs that consume excessive
+    amounts of CPU.
+
+    These inputs might be delivered via TLS handshakes, X.509 certificates, JWT
+    tokens, ECDH shares or ECDSA signatures. In some cases, if an ECDH private key
+    is reused more than once, the attack can also lead to key recovery.
+published: 2022-05-24T15:21:01Z
+cves:
+    - CVE-2019-6486
+credits:
+    - Wycheproof Project
+references:
+    - fix: https://go.dev/cl/159218
+    - fix: https://go.googlesource.com/go/+/193c16a3648b8670a762e925b6ac6e074f468a20
+    - report: https://go.dev/issue/29903
+    - web: https://groups.google.com/g/golang-announce/c/mVeX35iXuSw

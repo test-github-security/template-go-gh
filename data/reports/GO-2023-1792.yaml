@@ -1,0 +1,28 @@
+id: GO-2023-1792
+modules:
+    - module: github.com/rs/cors
+      versions:
+        - fixed: 1.5.0
+      vulnerable_at: 1.4.0
+      packages:
+        - package: github.com/rs/cors
+          symbols:
+            - New
+            - Cors.handlePreflight
+          derived_symbols:
+            - AllowAll
+            - Cors.HandlerFunc
+            - Cors.ServeHTTP
+            - Default
+summary: Insecure wildcard CORS policy in github.com/rs/cors
+description: |-
+    The CORS handler actively converts a wildcard CORS policy into reflecting an
+    arbitrary Origin header value, which is incompatible with the CORS security
+    design, and could lead to CORS misconfiguration security problems.
+cves:
+    - CVE-2018-20744
+ghsas:
+    - GHSA-927h-x4qj-r242
+references:
+    - fix: https://github.com/rs/cors/pull/57
+    - report: https://github.com/rs/cors/issues/55

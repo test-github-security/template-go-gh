@@ -1,0 +1,54 @@
+{
+  "dataType": "CVE_RECORD",
+  "dataVersion": "5.0",
+  "cveMetadata": {
+    "cveId": "CVE-2020-36562"
+  },
+  "containers": {
+    "cna": {
+      "providerMetadata": {
+        "orgId": "1bb62c36-49e3-4200-9d77-64a1400537cc"
+      },
+      "title": "Uncontrolled Resource Consumption in github.com/shiyanhui/dht",
+      "descriptions": [
+        {
+          "lang": "en",
+          "value": "Due to unchecked type assertions, maliciously crafted messages can cause panics, which may be used as a denial of service vector."
+        }
+      ],
+      "affected": [
+        {
+          "vendor": "github.com/shiyanhui/dht",
+          "product": "github.com/shiyanhui/dht",
+          "collectionURL": "https://pkg.go.dev",
+          "packageName": "github.com/shiyanhui/dht",
+          "defaultStatus": "affected"
+        }
+      ],
+      "problemTypes": [
+        {
+          "descriptions": [
+            {
+              "lang": "en",
+              "description": "CWE-400: Uncontrolled Resource Consumption"
+            }
+          ]
+        }
+      ],
+      "references": [
+        {
+          "url": "https://github.com/shiyanhui/dht/issues/57"
+        },
+        {
+          "url": "https://pkg.go.dev/vuln/GO-2020-0040"
+        }
+      ],
+      "credits": [
+        {
+          "lang": "en",
+          "value": "@hMihaiDavid"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+id: GO-2022-0436
+excluded: EFFECTIVELY_PRIVATE
+modules:
+    - module: github.com/aws/amazon-ssm-agent
+cves:
+    - CVE-2022-29527

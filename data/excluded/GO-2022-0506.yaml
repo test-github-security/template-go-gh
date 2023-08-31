@@ -1,0 +1,8 @@
+id: GO-2022-0506
+excluded: EFFECTIVELY_PRIVATE
+modules:
+    - module: github.com/hyperledger/fabric
+cves:
+    - CVE-2022-31121
+ghsas:
+    - GHSA-72x4-cq6r-jp4p

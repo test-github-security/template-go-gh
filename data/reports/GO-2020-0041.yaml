@@ -1,0 +1,45 @@
+id: GO-2020-0041
+modules:
+    - module: github.com/unknwon/cae
+      versions:
+        - fixed: 1.0.1
+      vulnerable_at: 1.0.0
+      packages:
+        - package: github.com/unknwon/cae/tz
+          symbols:
+            - TzArchive.syncFiles
+            - TzArchive.ExtractToFunc
+          derived_symbols:
+            - Create
+            - ExtractTo
+            - Open
+            - OpenFile
+            - TzArchive.Close
+            - TzArchive.ExtractTo
+            - TzArchive.Flush
+            - TzArchive.Open
+        - package: github.com/unknwon/cae/zip
+          symbols:
+            - ZipArchive.Open
+            - ZipArchive.ExtractToFunc
+          derived_symbols:
+            - Create
+            - ExtractTo
+            - ExtractToFunc
+            - Open
+            - OpenFile
+            - ZipArchive.Close
+            - ZipArchive.ExtractTo
+            - ZipArchive.Flush
+summary: Path Traversal in github.com/unknwon/cae
+description: |-
+    Due to improper path sanitization, archives containing relative file paths can
+    cause files to be written (or overwritten) outside of the target directory.
+published: 2021-04-14T20:04:52Z
+cves:
+    - CVE-2020-7668
+ghsas:
+    - GHSA-88jf-7rch-32qc
+references:
+    - fix: https://github.com/unknwon/cae/commit/07971c00a1bfd9dc171c3ad0bfab5b67c2287e11
+    - web: https://snyk.io/research/zip-slip-vulnerability

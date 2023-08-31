@@ -1,0 +1,47 @@
+id: GO-2021-0057
+modules:
+    - module: github.com/buger/jsonparser
+      versions:
+        - fixed: 1.1.1
+      vulnerable_at: 1.1.0
+      packages:
+        - package: github.com/buger/jsonparser
+          symbols:
+            - searchKeys
+          derived_symbols:
+            - ArrayEach
+            - Delete
+            - EachKey
+            - FuzzDelete
+            - FuzzEachKey
+            - FuzzGetBoolean
+            - FuzzGetFloat
+            - FuzzGetInt
+            - FuzzGetString
+            - FuzzGetUnsafeString
+            - FuzzObjectEach
+            - FuzzSet
+            - Get
+            - GetBoolean
+            - GetFloat
+            - GetInt
+            - GetString
+            - GetUnsafeString
+            - ObjectEach
+            - Set
+summary: Panic due to improper input validation in github.com/buger/jsonparser
+description: |-
+    Due to improper bounds checking, maliciously crafted JSON objects can cause an
+    out-of-bounds panic. If parsing user input, this may be used as a denial of
+    service vector.
+published: 2021-04-14T20:04:52Z
+cves:
+    - CVE-2020-35381
+ghsas:
+    - GHSA-8vrw-m3j9-j27c
+credits:
+    - '@toptotu'
+references:
+    - fix: https://github.com/buger/jsonparser/pull/221
+    - fix: https://github.com/buger/jsonparser/commit/df3ea76ece10095374fd1c9a22a4fb85a44efc42
+    - web: https://github.com/buger/jsonparser/issues/219

@@ -1,0 +1,24 @@
+id: GO-2020-0035
+modules:
+    - module: github.com/yi-ge/unzip
+      versions:
+        - fixed: 1.0.3-0.20200308084313-2adbaa4891b9
+      vulnerable_at: 1.0.3-0.20190904092328-cc5a75ef5eca
+      packages:
+        - package: github.com/yi-ge/unzip
+          symbols:
+            - Unzip.Extract
+summary: Path traversal in github.com/yi-ge/unzip
+description: |-
+    Due to improper path sanitization, archives containing relative file paths can
+    cause files to be written (or overwritten) outside of the target directory.
+published: 2021-04-14T20:04:52Z
+ghsas:
+    - GHSA-f5c5-hmw9-v8hx
+references:
+    - fix: https://github.com/yi-ge/unzip/pull/1
+    - fix: https://github.com/yi-ge/unzip/commit/2adbaa4891b9690853ef10216189189f5ad7dc73
+    - web: https://snyk.io/research/zip-slip-vulnerability
+cve_metadata:
+    id: CVE-2020-36561
+    cwe: 'CWE 29: Path Traversal: "\..\filename"'

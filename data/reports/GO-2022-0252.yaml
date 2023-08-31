@@ -1,0 +1,31 @@
+id: GO-2022-0252
+modules:
+    - module: github.com/cloudflare/cfrpki
+      versions:
+        - fixed: 1.4.0
+      vulnerable_at: 1.3.0
+      packages:
+        - package: github.com/cloudflare/cfrpki/validator/lib
+          symbols:
+            - IPNet.GetRange
+            - ValidateIPCertificateList
+            - GetRangeIP
+            - ValidateIPRoaCertificateList
+          derived_symbols:
+            - DecodeROA
+            - DecoderConfig.DecodeROA
+            - RPKICertificate.ValidateIPCertificate
+            - RPKIROA.ValidateIPRoaCertificate
+summary: Panic on misconfigured IP address in github.com/cloudflare/cfrpki
+description: |-
+    OctoRPKI crashes when a repository returns an ROA with a IP address that
+    contains too many bits.
+published: 2022-07-15T23:07:41Z
+cves:
+    - CVE-2021-3911
+ghsas:
+    - GHSA-w6ww-fmfx-2x22
+credits:
+    - Koen van Hove
+references:
+    - fix: https://github.com/cloudflare/cfrpki/commit/2882307febd66801de97b2a2ce4d93fe58132005

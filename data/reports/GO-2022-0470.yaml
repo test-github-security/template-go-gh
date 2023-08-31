@@ -1,0 +1,48 @@
+id: GO-2022-0470
+modules:
+    - module: github.com/blevesearch/bleve
+      vulnerable_at: 1.0.14
+      packages:
+        - package: github.com/blevesearch/bleve/http
+          symbols:
+            - AliasHandler.ServeHTTP
+            - CreateIndexHandler.ServeHTTP
+            - DebugDocumentHandler.ServeHTTP
+            - DeleteIndexHandler.ServeHTTP
+            - DocCountHandler.ServeHTTP
+            - DocDeleteHandler.ServeHTTP
+            - DocGetHandler.ServeHTTP
+            - DocIndexHandler.ServeHTTP
+            - GetIndexHandler.ServeHTTP
+            - ListFieldsHandler.ServeHTTP
+            - SearchHandler.ServeHTTP
+    - module: github.com/blevesearch/bleve/v2
+      vulnerable_at: 2.3.2
+      packages:
+        - package: github.com/blevesearch/bleve/v2/http
+          symbols:
+            - AliasHandler.ServeHTTP
+            - CreateIndexHandler.ServeHTTP
+            - DebugDocumentHandler.ServeHTTP
+            - DeleteIndexHandler.ServeHTTP
+            - DocCountHandler.ServeHTTP
+            - DocDeleteHandler.ServeHTTP
+            - DocGetHandler.ServeHTTP
+            - DocIndexHandler.ServeHTTP
+            - GetIndexHandler.ServeHTTP
+            - ListFieldsHandler.ServeHTTP
+            - SearchHandler.ServeHTTP
+summary: No access control in github.com/blevesearch/bleve and bleve/v2
+description: |-
+    HTTP handlers provide unauthenticated access to the local filesystem.
+
+    The Bleve http package is intended for demonstration purposes and contains no
+    authentication, authorization, or validation of user inputs. Exposing handlers
+    from this package can permit attackers to create files and delete directories.
+published: 2022-07-15T23:29:55Z
+cves:
+    - CVE-2022-31022
+ghsas:
+    - GHSA-9w9f-6mg8-jp7w
+references:
+    - fix: https://github.com/blevesearch/bleve/commit/1c7509d6a17d36f265c90b4e8f4e3a3182fe79ff

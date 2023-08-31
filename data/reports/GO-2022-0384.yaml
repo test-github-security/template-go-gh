@@ -1,0 +1,31 @@
+id: GO-2022-0384
+modules:
+    - module: helm.sh/helm/v3
+      versions:
+        - fixed: 3.6.1
+      vulnerable_at: 3.6.0
+      packages:
+        - package: helm.sh/helm/v3/pkg/downloader
+          symbols:
+            - ChartDownloader.ResolveChartVersion
+          derived_symbols:
+            - ChartDownloader.DownloadTo
+            - Manager.Build
+            - Manager.Update
+summary: Repository credentials passed to alternate domain in helm.sh/helm/v3
+description: |-
+    The username and password credentials associated with a Helm repository can be
+    passed to another domain referenced by that Helm repository.
+
+    If the index.yaml for a Helm repository is hosted on one domain and references a
+    chart archive on a different domain, Helm will provide the credentials for the
+    index.yaml's domain when fetching those archives.
+published: 2022-07-15T23:29:45Z
+cves:
+    - CVE-2021-32690
+ghsas:
+    - GHSA-56hp-xqp3-w2jf
+    - GHSA-7jr6-prv4-5wf5
+references:
+    - advisory: https://github.com/advisories/GHSA-56hp-xqp3-w2jf
+    - fix: https://github.com/helm/helm/commit/61d8e8c4a6f95540c15c6a65f36a6dd0a45e7a2f

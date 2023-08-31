@@ -1,0 +1,8 @@
+id: GO-2022-0881
+excluded: NOT_IMPORTABLE
+modules:
+    - module: github.com/tendermint/tendermint
+cves:
+    - CVE-2020-5303
+ghsas:
+    - GHSA-v24h-pjjv-mcp6

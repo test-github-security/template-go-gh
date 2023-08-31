@@ -1,0 +1,6 @@
+id: GO-2022-0443
+excluded: NOT_GO_CODE
+modules:
+    - module: github.com/cesanta/mongoose-os
+cves:
+    - CVE-2021-27425

@@ -1,0 +1,8 @@
+id: GO-2022-1009
+excluded: EFFECTIVELY_PRIVATE
+modules:
+    - module: github.com/goharbor/harbor
+cves:
+    - CVE-2022-31667
+ghsas:
+    - GHSA-xx9w-464f-7h6f

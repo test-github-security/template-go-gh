@@ -1,0 +1,42 @@
+id: GO-2022-0322
+modules:
+    - module: github.com/prometheus/client_golang
+      versions:
+        - fixed: 1.11.1
+      vulnerable_at: 1.11.0
+      packages:
+        - package: github.com/prometheus/client_golang/prometheus/promhttp
+          symbols:
+            - sanitizeMethod
+          derived_symbols:
+            - Handler
+            - HandlerFor
+            - InstrumentHandlerCounter
+            - InstrumentHandlerDuration
+            - InstrumentHandlerRequestSize
+            - InstrumentHandlerResponseSize
+            - InstrumentHandlerTimeToWriteHeader
+            - InstrumentMetricHandler
+            - InstrumentRoundTripperCounter
+            - InstrumentRoundTripperDuration
+            - flusherDelegator.Flush
+            - readerFromDelegator.ReadFrom
+            - responseWriterDelegator.Write
+            - responseWriterDelegator.WriteHeader
+summary: Uncontrolled resource consumption in github.com/prometheus/client_golang
+description: |-
+    The Prometheus client_golang HTTP server is vulnerable to a denial of service
+    attack when handling requests with non-standard HTTP methods.
+
+    In order to be affected, an instrumented software must use any of the
+    promhttp.InstrumentHandler* middleware except `RequestsInFlight`; not filter any
+    specific methods (e.g GET) before middleware; pass a metric with a "method"
+    label name to a middleware; and not have any firewall/LB/proxy that filters away
+    requests with unknown "method".
+published: 2022-07-15T23:29:02Z
+cves:
+    - CVE-2022-21698
+ghsas:
+    - GHSA-cg3q-j54f-5p7p
+references:
+    - fix: https://github.com/prometheus/client_golang/pull/962

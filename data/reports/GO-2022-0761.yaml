@@ -1,0 +1,33 @@
+id: GO-2022-0761
+modules:
+    - module: std
+      versions:
+        - fixed: 1.6.3
+      vulnerable_at: 1.6.2
+      packages:
+        - package: net/http
+          symbols:
+            - Handler.ServeHTTP
+        - package: net/http/cgi
+          symbols:
+            - ProxyFromEnvironment
+summary: Improper input validation in net/http and net/http/cgi
+description: |-
+    An input validation flaw in the CGI components allows the HTTP_PROXY environment
+    variable to be set by the incoming Proxy header, which changes where Go by
+    default proxies all outbound HTTP requests.
+
+    This environment variable is also used to set the outgoing proxy, enabling an
+    attacker to insert a proxy into outgoing requests of a CGI program.
+
+    Read more about "httpoxy" here: https://httpoxy.org.
+published: 2022-08-09T17:05:15Z
+cves:
+    - CVE-2016-5386
+credits:
+    - Dominic Scheirlinck
+references:
+    - fix: https://go.dev/cl/25010
+    - fix: https://go.googlesource.com/go/+/b97df54c31d6c4cc2a28a3c83725366d52329223
+    - report: https://go.dev/issue/16405
+    - web: https://groups.google.com/g/golang-announce/c/7jZDOQ8f8tM/m/eWRWHnc8CgAJ

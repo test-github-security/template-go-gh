@@ -1,0 +1,44 @@
+id: GO-2021-0226
+modules:
+    - module: std
+      versions:
+        - fixed: 1.14.8
+        - introduced: 1.15.0-0
+          fixed: 1.15.1
+      vulnerable_at: 1.15.0
+      packages:
+        - package: net/http/cgi
+          symbols:
+            - response.Write
+            - response.WriteHeader
+            - response.writeCGIHeader
+          skip_fix: 'TODO: revisit this reason (fix appears to not work with Go <1.18)'
+        - package: net/http/fcgi
+          symbols:
+            - response.Write
+            - response.WriteHeader
+            - response.writeCGIHeader
+          skip_fix: 'TODO: revisit this reason (fix appears to not work with Go <1.18)'
+summary: Cross-site scripting in net/http/cgi and net/http/fcgi
+description: |-
+    When a Handler does not explicitly set the Content-Type header, the the package
+    would default to “text/html”, which could cause a Cross-Site Scripting
+    vulnerability if an attacker can control any part of the contents of a response.
+
+    The Content-Type header is now set based on the contents of the first Write
+    using http.DetectContentType, which is consistent with the behavior of the
+    net/http package.
+
+    Although this protects some applications that validate the contents of uploaded
+    files, not setting the Content-Type header explicitly on any attacker-controlled
+    file is unsafe and should be avoided.
+published: 2022-01-13T03:44:58Z
+cves:
+    - CVE-2020-24553
+credits:
+    - RedTeam Pentesting GmbH
+references:
+    - fix: https://go.dev/cl/252179
+    - fix: https://go.googlesource.com/go/+/4f5cd0c0331943c7ec72df3b827d972584f77833
+    - web: https://groups.google.com/g/golang-announce/c/8wqlSbkLdPs
+    - report: https://go.dev/issue/40928
